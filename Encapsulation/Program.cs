@@ -28,6 +28,7 @@ namespace Encapsulation
             //2. Salary Increase
             var si = new StartUp();
             si.MySalaryIncrease();
+
         }
     }
 }

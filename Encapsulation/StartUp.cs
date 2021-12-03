@@ -16,13 +16,31 @@ namespace Encapsulation
             Console.WriteLine("Ange förnamn efternamn ålder lön");
             for (int i = 0; i < lines; i++)
             {
-                Console.Write(i+1+": ");
+                Console.Write(i + 1 + ": ");
                 var cmdArgs = Console.ReadLine().Split();
-                var person = new Person(cmdArgs[0],
-                    cmdArgs[1],
-                    int.Parse(cmdArgs[2]),
-                    decimal.Parse(cmdArgs[3]));
-                persons.Add(person);
+                if (cmdArgs.Length != 4)
+                {
+                    Console.WriteLine("Du måste ange fyra värden!");
+                    i--;
+                }
+                else
+                {
+                    try
+                    {
+                        var person = new Person(cmdArgs[0],
+                            cmdArgs[1],
+                            int.Parse(cmdArgs[2]),
+                            decimal.Parse(cmdArgs[3]));
+                        persons.Add(person);
+                        //person.Salary = 5000;   // priate set   dont work
+                        //person.Age = 55;        // internal set works!
+                    }
+                    catch (ArgumentException ae)
+                    {
+                        Console.WriteLine("ERROR {0} {1}", ae.ParamName, ae.Message);
+                        i--;
+                    }
+                }
             }
 
             Console.WriteLine("Ange bonus i procent.");
